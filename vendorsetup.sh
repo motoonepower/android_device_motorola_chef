@@ -1,2 +1,2 @@
-add_lunch_combo twrp_chef-eng
-add_lunch_combo twrp_chef-userdebug
+add_lunch_combo omni_chef-eng
+add_lunch_combo omni_chef-userdebug
