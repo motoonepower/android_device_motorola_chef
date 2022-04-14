@@ -14,10 +14,10 @@
 # limitations under the License.
 #
 
-$(call inherit-product, build/target/product/embedded.mk)
+$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/embedded.mk)
 
 # Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 # A/B updater
 AB_OTA_UPDATER := true
