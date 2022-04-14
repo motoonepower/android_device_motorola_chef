@@ -15,7 +15,7 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_chef.mk
+    $(LOCAL_DIR)/omni_chef.mk
 
 COMMON_LUNCH_CHOICES := \
     omni_chef-eng \
