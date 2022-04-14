@@ -18,6 +18,6 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/twrp_chef.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_chef-eng \
-    twrp_chef-userdebug \
-    twrp_chef-user
+    omni_chef-eng \
+    omni_chef-userdebug \
+    omni_chef-user
