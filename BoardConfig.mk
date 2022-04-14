@@ -64,7 +64,10 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_PREBUILT_KERNEL := $(PLATFORM_PATH)/Image.gz-dtb
 BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 earlycon=msm_serial_dm,0xc170000 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=1 androidboot.configfs=true androidboot.usbcontroller=a800000.dwc3 androidboot.hab.csv=0 androidboot.hab.product=chef androidboot.hab.cid=50 androidboot.selinux=permissive
 # For the love of all that is holy, please do not include this in your ROM unless you really want TWRP to not work correctly!
-BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
+BOARD_KERNEL_CMDLINE := \
+    androidboot.fastboot=1 \
+    # Retrofit Dynamic
+    androidboot.boot_devices=soc/c0c4000.sdhci
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -83,12 +86,20 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-
+# Retrofit dynamic partitions
+BOARD_SUPER_PARTITION_GROUPS := moto_dynamic_partitions
+BOARD_MOTO_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor
+BOARD_MOTO_DYNAMIC_PARTITIONS_SIZE := 3904897024
+BOARD_SUPER_PARTITION_SIZE := 3909091328
+BOARD_SUPER_PARTITION_METADATA_DEVICE := system
+BOARD_SUPER_PARTITION_BLOCK_DEVICES := system vendor
+BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 2684354560
+BOARD_SUPER_PARTITION_VENDOR_DEVICE_SIZE := 536870912
 # A/B device flags
 TARGET_NO_KERNEL := false
 #TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+#BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 AB_OTA_UPDATER := true
 USE_COMMON_BOOTCTRL := true
 

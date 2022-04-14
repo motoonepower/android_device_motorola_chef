@@ -1,15 +1,20 @@
 # Android fstab file.
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+# Dyanmic Partitions
+/system         ext4     system                                     flags=display="System";backup=1;logical;slotselect
+/vendor         ext4     vendor                                     flags=display="Vendor";backup=1;logical;slotselect
 
+# Standard Partitions
 # mount point    fstype     device                 device2                        flags
 /boot            emmc       /dev/block/bootdevice/by-name/boot                    flags=slotselect
 /data            ext4      /dev/block/bootdevice/by-name/userdata                 flags=encryptable=ice
 /misc            emmc      /dev/block/bootdevice/by-name/misc
-/system          ext4      /dev/block/bootdevice/by-name/system                   flags=slotselect
-/system_image    emmc      /dev/block/bootdevice/by-name/system                   flags=slotselect
-/vendor          ext4      /dev/block/bootdevice/by-name/vendor                   flags=backup=1;display="Vendor";slotselect;wipeingui
-/vendor_image    emmc      /dev/block/bootdevice/by-name/vendor                   flags=backup=1;slotselect
+#/system          ext4      /dev/block/bootdevice/by-name/system                   flags=slotselect
+#/system_image    emmc      /dev/block/bootdevice/by-name/system                   flags=slotselect
+#/vendor          ext4      /dev/block/bootdevice/by-name/vendor                   flags=backup=1;display="Vendor";slotselect;wipeingui
+#/vendor_image    emmc      /dev/block/bootdevice/by-name/vendor                   flags=backup=1;slotselect
+/super            emmc          /dev/block/bootdevice/by-name/super          flags=backup=1;display="Super";flashimg=1
 /efs1            emmc      /dev/block/bootdevice/by-name/modemst1                 flags=backup=1;display=EFS
 /efs2            emmc      /dev/block/bootdevice/by-name/modemst2                 flags=backup=1;subpartitionof=/efs1
 /persist         ext4      /dev/block/bootdevice/by-name/persist                  flags=backup=1;display="Persist"

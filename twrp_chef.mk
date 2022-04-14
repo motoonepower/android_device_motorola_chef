@@ -55,12 +55,35 @@ PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     libz \
     libcutils
 
+# tell update_engine to not change dynamic partition table during updates
+# needed since our qti_dynamic_partitions does not include
+# vendor and odm and we also dont want to AB update them
+TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
+
+# Enable retrofit dynamic partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
+
+PRODUCT_PACKAGES += \
+    check_dynamic_partitions
+
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_product=true \
+    POSTINSTALL_PATH_product=bin/check_dynamic_partitions \
+    FILESYSTEM_TYPE_product=ext4 \
+    POSTINSTALL_OPTIONAL_product=false
+
+# fastbootd
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
+    fastbootd
+
 PRODUCT_PACKAGES += \
     charger_res_images \
     charger
 
 PRODUCT_DEVICE := chef
-PRODUCT_NAME := omni_chef
+PRODUCT_NAME := twrp_chef
 PRODUCT_BRAND := motorola
 PRODUCT_MODEL := Moto One Power
 PRODUCT_MANUFACTURER := Motorola
