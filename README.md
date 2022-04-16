@@ -1,50 +1,39 @@
-# TWRP Device configuration for Motorola Moto One Power
+# TWRP Device configuration for Motorola Moto G7 Plus
 
-## Device specifications
+## Device specification
 
 Basic   | Spec Sheet
--------:|:-------------------------
+-------:|:------------------------
 CPU     | Octa-core 1.8 GHz Kryo 260
 CHIPSET | Qualcomm SDM636 Snapdragon 636
 GPU     | Adreno 509
 Memory  | 4GB
-Shipped Android Version | 8.1 (Oreo)
+Shipped Android Version | 9.0 (Pie)
 Storage | 64GB
-Battery | 5000 mAh
-Dimensions | 156 x 76 x 8.98 mm
-Display | 1080 x 2246 pixels, 6.2" IPS LCD
-Rear Camera  | 16 MP (f/1.8) + 5 MP (f/2.2), (PDAF, dual pixel)
-Front Camera | 12 MP (f/2.2)
+Battery | 3000 mAh
+Dimensions | 157 x 75.3 x 8.3 mm
+Display | 1080 x 2270 pixels, 19:9 ratio
+Rear Camera  | 16 MP, f/1.7, 1.22µm, PDAF, OIS + 12 MP, 1.25µm depth sensor
+Front Camera | 12 MP, 1.25µm
 
-![Device Picture](https://i-cdn.phonearena.com//images/phones/73027-xlarge/Motorola-One-Power-5.jpg)
+![Device Picture](https://cdn2.gsmarena.com/vv/pics/motorola/motorola-moto-g7-plus-2.jpg)
 
 ### Kernel Source
-Check here: https://github.com/ixmoe/android_kernel_motorola_sdm660
+Check here: https://github.com/Jleeblanch/kernel_motorola_sdm660/tree/twrp-9.0-lake
 
 ### How to compile
 
-```sh
-. build/envsetup.sh
-lunch omni_chef-eng
-make -j4 recoveryimage
 ```
-### Copyright
- ```
-  /*
-  *  Copyright (C) 2013-17 The OmniROM Project
-  *
-  * This program is free software: you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License as published by
-  * the Free Software Foundation, either version 3 of the License, or
-  * (at your option) any later version.
-  *
-  * This program is distributed in the hope that it will be useful,
-  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  * GNU General Public License for more details.
-  *
-  * You should have received a copy of the GNU General Public License
-  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  *
-  */
-  ```
+export ALLOW_MISSING_DEPENDENCIES=true
+. build/envsetup.sh
+lunch omni_lake-eng
+mka clean && mka recoveryimage
+```
+
+### Test build
+
+```
+cd out/target/product/lake
+fastboot boot recovery.img
+```
+NOTE: TWRP can also be installed! Decryption of /data works either way!
